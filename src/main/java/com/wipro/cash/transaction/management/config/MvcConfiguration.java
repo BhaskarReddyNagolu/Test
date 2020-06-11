@@ -33,6 +33,8 @@ public class MvcConfiguration extends WebMvcConfigurationSupport {
 		registry.addViewController("/").setViewName(Constants.LOGIN);
 		registry.addViewController("/login**").setViewName(Constants.LOGIN);
 		registry.addViewController("/logout**").setViewName(Constants.LOGIN);
+		registry.addViewController("/redeemDetails**").setViewName("redeemDetails");
+		registry.addViewController("/postredeemDetails**").setViewName(Constants.SUCCESS);
 	}
 
 	@Override

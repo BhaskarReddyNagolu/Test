@@ -16,7 +16,14 @@
 
 	<div class="topnav">
 		<strong> <a href="#">Cash Transfer</a> <a href="#">View
-				Transaction History</a> <a href="#">Redeem</a> <a style="float: right;"
+				Transaction History</a>
+				<c:forEach var="userDetails" items="${userDetails}">
+				<c:if test="${userDetails.getPremiumUser().equals('Yes')}"> 
+				<a href="/redeemDetails">Redeem</a>
+                </c:if>
+				</c:forEach>
+				
+				  <a style="float: right;"
 			href="${pageContext.request.contextPath }/logout">Logout</a>
 		</strong>
 	</div>

@@ -56,6 +56,7 @@ public class LoginController {
 				userAccountDetailsList.add(userAccountDetails);
 				model.addAttribute(Constants.USERNAME, userAccountDetails.getUserName());
 				request.setAttribute("userDetails", userAccountDetailsList);
+				request.getSession().setAttribute("loggedInUserDetails", userAccountDetails);
 				return Constants.SUCCESS;
 			} else {
 				model.addAttribute(Constants.ERROR, "Invalid Credentials");

@@ -14,4 +14,6 @@ public interface CashTransactionManagementDao {
 	List<UserAccountDetails> getUserAccountDetails();
 	
 	UserAccountDetails findUserAccountByUserId(String userId);
+	
+	void updateRedeemPoints(String userId, Integer balanceAmount, Integer redeemPoints);
 }

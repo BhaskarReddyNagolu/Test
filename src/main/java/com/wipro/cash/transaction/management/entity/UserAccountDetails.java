@@ -30,6 +30,10 @@ public class UserAccountDetails implements Serializable {
 
 	private Integer balanceAmount;
 
+	private Integer redeemPoints;
+
+	private String transferType;
+
 	/**
 	 * @return the accountNo
 	 */
@@ -38,7 +42,8 @@ public class UserAccountDetails implements Serializable {
 	}
 
 	/**
-	 * @param accountNo the accountNo to set
+	 * @param accountNo
+	 *            the accountNo to set
 	 */
 	public void setAccountNo(Integer accountNo) {
 		this.accountNo = accountNo;
@@ -52,7 +57,8 @@ public class UserAccountDetails implements Serializable {
 	}
 
 	/**
-	 * @param userName the userName to set
+	 * @param userName
+	 *            the userName to set
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -66,7 +72,8 @@ public class UserAccountDetails implements Serializable {
 	}
 
 	/**
-	 * @param loginId the loginId to set
+	 * @param loginId
+	 *            the loginId to set
 	 */
 	public void setLoginId(String loginId) {
 		this.loginId = loginId;
@@ -80,7 +87,8 @@ public class UserAccountDetails implements Serializable {
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -94,7 +102,8 @@ public class UserAccountDetails implements Serializable {
 	}
 
 	/**
-	 * @param premiumUser the premiumUser to set
+	 * @param premiumUser
+	 *            the premiumUser to set
 	 */
 	public void setPremiumUser(String premiumUser) {
 		this.premiumUser = premiumUser;
@@ -108,16 +117,33 @@ public class UserAccountDetails implements Serializable {
 	}
 
 	/**
-	 * @param balanceAmount the balanceAmount to set
+	 * @param balanceAmount
+	 *            the balanceAmount to set
 	 */
 	public void setBalanceAmount(Integer balanceAmount) {
 		this.balanceAmount = balanceAmount;
 	}
 
+	public Integer getRedeemPoints() {
+		return redeemPoints;
+	}
+
+	public void setRedeemPoints(Integer redeemPoints) {
+		this.redeemPoints = redeemPoints;
+	}
+
+	public String getTransferType() {
+		return transferType;
+	}
+
+	public void setTransferType(String transferType) {
+		this.transferType = transferType;
+	}
+
 	@Override
 	public String toString() {
 		return "UserAccountDetails [accountNo=" + accountNo + ", userName=" + userName + ", loginId=" + loginId
-				+ ", password=" + password + ", premiumUser=" + premiumUser + ", balanceAmount=" + balanceAmount + "]";
+				+ ", password=" + password + ", premiumUser=" + premiumUser + ", balanceAmount=" + balanceAmount +  ", redeemPoints=" + redeemPoints +  ", transferType=" + transferType + "]";
 	}
 
 }

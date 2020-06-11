@@ -29,4 +29,10 @@ public class CashTransactionManagementServiceImpl implements CashTransactionMana
 		return cashTransactionManagementDao.findUserAccountByUserId(userId);
 	}
 
+	@Override
+	public void updateRedeemPoints(String userId, Integer balanceAmount, Integer redeemPoints) {
+		 cashTransactionManagementDao.updateRedeemPoints(userId, balanceAmount, redeemPoints);
+		
+	}
+
 }
