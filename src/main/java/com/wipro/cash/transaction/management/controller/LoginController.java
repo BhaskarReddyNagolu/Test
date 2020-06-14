@@ -37,9 +37,17 @@ public class LoginController {
 	LocalDate date = LocalDate.now();
 
 	@GetMapping(value = "/")
-	public String homePage(Model model) {
+	public String login(Model model) {
 		model.addAttribute(Constants.DATE, "Today is -  " + date.format(formatter));
 		return Constants.LOGIN;
+	}
+	
+	@GetMapping(value = "/home")
+	public String homePage(HttpServletRequest request, Model model) {
+		@SuppressWarnings("unchecked")
+		List<UserAccountDetails> accountDetails =  (List<UserAccountDetails>) request.getSession().getAttribute("userDetails");
+		model.addAttribute(Constants.USERNAME, accountDetails.get(0).getUserName());
+		return Constants.SUCCESS;
 	}
 
 	@PostMapping(value = "/login")
@@ -55,7 +63,7 @@ public class LoginController {
 				List<UserAccountDetails> userAccountDetailsList = new ArrayList<>();
 				userAccountDetailsList.add(userAccountDetails);
 				model.addAttribute(Constants.USERNAME, userAccountDetails.getUserName());
-				request.setAttribute("userDetails", userAccountDetailsList);
+				request.getSession().setAttribute("userDetails", userAccountDetailsList);
 				request.getSession().setAttribute("loggedInUserDetails", userAccountDetails);
 				return Constants.SUCCESS;
 			} else {
