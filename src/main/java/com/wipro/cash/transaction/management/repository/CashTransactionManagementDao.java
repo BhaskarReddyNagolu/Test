@@ -17,9 +17,9 @@ public interface CashTransactionManagementDao {
 
 	void updateRedeemPoints(String userId, Integer balanceAmount, Integer redeemPoints);
 
-	UserAccountDetails findUserAccountByAccountNumber(Integer accountnumber);
+	UserAccountDetails findUserAccountByAccountNumber(Integer accountNumber);
 
-	void updateBalanceAmount(Integer account_number, Integer balanceAmount);
+	void updateBalanceAmount(Integer accountNumber, Integer balanceAmount);
 
 	void updateRedeemPoints(String userId, Integer redeemPoints);
 }

@@ -15,16 +15,14 @@
 <body>
 
 	<div class="topnav">
-		<strong> <a href="/cashTransfer">Cash Transfer</a> <a href="/transactionHistory">View
-				Transaction History</a>
-				<c:forEach var="userDetails" items="${userDetails}">
-				<c:if test="${userDetails.getPremiumUser().equals('Yes')}"> 
-				<a href="/redeemDetails">Redeem</a>
-                </c:if>
-				</c:forEach>
-				
-				  <a style="float: right;"
-			href="${pageContext.request.contextPath }/logout">Logout</a>
+		<strong> <a href="/cashTransfer">Cash Transfer</a> <a
+			href="/transactionHistory">View Transaction History</a> <c:forEach
+				var="userDetails" items="${userDetails}">
+				<c:if test="${userDetails.getPremiumUser().equals('Yes')}">
+					<a href="${pageContext.request.contextPath}/redeemDetails">Redeem</a>
+				</c:if>
+			</c:forEach> <a style="float: right;"
+			href="${pageContext.request.contextPath}/logout">Logout</a>
 		</strong>
 	</div>
 	<div id="successHeader">

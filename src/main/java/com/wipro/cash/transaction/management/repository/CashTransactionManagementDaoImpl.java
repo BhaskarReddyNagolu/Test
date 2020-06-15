@@ -15,15 +15,12 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.wipro.cash.transaction.management.config.QueryProperties;
 import com.wipro.cash.transaction.management.constants.Constants;
 import com.wipro.cash.transaction.management.entity.UserAccountDetails;
 import com.wipro.cash.transaction.management.exception.CashTransactionManagementException;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
 
 /**
  * @author Bhaskar
@@ -78,9 +75,10 @@ public class CashTransactionManagementDaoImpl implements CashTransactionManageme
 			MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
 			mapSqlParameterSource.addValue(Constants.USER_ID, userId);
 			LOGGER.debug("FindUserAccountBy UserId {} and Sql Query - {} ", userId,
-					queryProperties.getAccountDetailsByUserId());
-			userAccountDetails = namedParameterJdbcTemplate.queryForObject(queryProperties.getAccountDetailsByUserId(),
-					mapSqlParameterSource, new UserAccountDetailsMapper());
+					queryProperties.getUserAccountDetailsByUserId());
+			userAccountDetails = namedParameterJdbcTemplate.queryForObject(
+					queryProperties.getUserAccountDetailsByUserId(), mapSqlParameterSource,
+					new UserAccountDetailsMapper());
 		} catch (DataAccessException dataAccessException) {
 			LOGGER.error("UserAccountDetails By UserId  - {} and an Exception - {} ", userId, dataAccessException);
 		}
@@ -91,27 +89,17 @@ public class CashTransactionManagementDaoImpl implements CashTransactionManageme
 	@Override
 
 	public void updateRedeemPoints(String userId, Integer balanceAmount, Integer redeemPoints) {
-		UserAccountDetails userAccountDetails = null;
 		try {
 			MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
 			mapSqlParameterSource.addValue(Constants.USER_ID, userId);
 			mapSqlParameterSource.addValue(Constants.BALANCE_AMOUNT, balanceAmount);
 			mapSqlParameterSource.addValue("redeem_points", redeemPoints);
-			final String UPDATE_QUERY = "update UserAccountDetails set redeem_points = :redeem_points,balance_amount= :balance_amount where login_id = :userId";
-
-			int status = namedParameterJdbcTemplate.update(UPDATE_QUERY, mapSqlParameterSource);
-
-			if (status != 0) {
-				System.out.println("Updated");
-			} else {
-				System.out.println("NOt updated");
-			}
-
+			int status = namedParameterJdbcTemplate.update(queryProperties.getUpdateUserAccountDetailsByUserId(),
+					mapSqlParameterSource);
+			LOGGER.debug("UpdateRedeemPoints Update Status  - {} ", status);
 		} catch (DataAccessException dataAccessException) {
-			LOGGER.error("UserAccountDetails By UserId  - {} and an Exception - {} ", userId, dataAccessException);
+			LOGGER.error("UpdateRedeemPoints By UserId  - {} and an Exception - {} ", userId, dataAccessException);
 		}
-		LOGGER.debug("UserAccountDetails by UserId Response   - {} ", userAccountDetails);
-
 	}
 
 	@Override
@@ -121,40 +109,30 @@ public class CashTransactionManagementDaoImpl implements CashTransactionManageme
 			MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
 			mapSqlParameterSource.addValue(Constants.ACCOUNT_NUMBER, accountnumber);
 
-			LOGGER.debug("FindUserAccountBy accountnumber {} and Sql Query - {} ", accountnumber,
-					queryProperties.getAccountDetailsByAccountNumber());
+			LOGGER.debug("Find User Account By AccountNumber {} and Sql Query - {} ", accountnumber,
+					queryProperties.getUpdateUserAccountDetailsByAccountNumber());
 
 			userAccountDetails = namedParameterJdbcTemplate.queryForObject(
-					queryProperties.getAccountDetailsByAccountNumber(), mapSqlParameterSource,
+					queryProperties.getUpdateUserAccountDetailsByAccountNumber(), mapSqlParameterSource,
 					new UserAccountDetailsMapper());
 		} catch (DataAccessException dataAccessException) {
-			LOGGER.error("UserAccountDetails By accountnumber  - {} and an Exception - {} ", accountnumber,
+			LOGGER.error("Find User Account By AccountNumber - {} and an Exception - {} ", accountnumber,
 					dataAccessException);
 		}
-		LOGGER.debug("UserAccountDetails by UserId Response   - {} ", userAccountDetails);
+		LOGGER.debug("Find User Account By AccountNumber Response   - {} ", userAccountDetails);
 		return userAccountDetails;
 	}
 
-	public void updateBalanceAmount(Integer account_number, Integer balanceAmount) {
-		UserAccountDetails userAccountDetails = null;
-
+	public void updateBalanceAmount(Integer accountNumber, Integer balanceAmount) {
 		try {
 			MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-			mapSqlParameterSource.addValue(Constants.ACCOUNT_NUMBER, account_number);
+			mapSqlParameterSource.addValue(Constants.ACCOUNT_NUMBER, accountNumber);
 			mapSqlParameterSource.addValue(Constants.BALANCE_AMOUNT, balanceAmount);
-			final String UPDATE_QUERY = "update UserAccountDetails set balance_amount= :balance_amount where account_number = :account_number";
-
-			int status = namedParameterJdbcTemplate.update(UPDATE_QUERY, mapSqlParameterSource);
-
-			if (status != 0) {
-				System.out.println("Updated");
-			} else {
-				System.out.println("NOt updated");
-			}
-			String query = "SELECT * FROM CashTransaction";
-
+			int status = namedParameterJdbcTemplate.update(queryProperties.getUpdateUserAccountDetailsByAccountNumber(),
+					mapSqlParameterSource);
+			LOGGER.debug("updateBalanceAmount Update Status  - {} ", status);
 		} catch (DataAccessException dataAccessException) {
-			LOGGER.error("UserAccountDetails By UserId  - {} and an Exception - {} ", account_number,
+			LOGGER.error("updateBalanceAmount By AccountNumber  - {} and an Exception - {} ", accountNumber,
 					dataAccessException);
 		}
 
@@ -162,26 +140,15 @@ public class CashTransactionManagementDaoImpl implements CashTransactionManageme
 
 	@Override
 	public void updateRedeemPoints(String userId, Integer redeemPoints) {
-		UserAccountDetails userAccountDetails = null;
 		try {
 			MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
 			mapSqlParameterSource.addValue(Constants.USER_ID, userId);
 			mapSqlParameterSource.addValue("redeem_points", redeemPoints);
-			final String UPDATE_QUERY = "update UserAccountDetails set redeem_points = :redeem_points  where login_id = :userId";
-
-			int status = namedParameterJdbcTemplate.update(UPDATE_QUERY, mapSqlParameterSource);
-
-			if (status != 0) {
-				System.out.println("ùpdate reedem points for cashtransfer");
-			} else {
-				System.out.println("reedem points not updated for cashtransfer");
-			}
-
+			int status = namedParameterJdbcTemplate.update(queryProperties.getUpdateUserAccountDetailsByUserId(),
+					mapSqlParameterSource);
+			LOGGER.debug("updateBalanceAmount Update Status  - {} ", status);
 		} catch (DataAccessException dataAccessException) {
 			LOGGER.error("UserAccountDetails By UserId  - {} and an Exception - {} ", userId, dataAccessException);
 		}
-		LOGGER.debug("UserAccountDetails by UserId Response   - {} ", userAccountDetails);
-
 	}
-
 }

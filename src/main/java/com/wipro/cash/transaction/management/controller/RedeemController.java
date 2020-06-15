@@ -29,54 +29,36 @@ public class RedeemController {
 
 	@GetMapping(value = "/redeemDetails")
 	public String getRedeemDetails(HttpServletRequest request, Model model) {
-
-		UserAccountDetails details = (UserAccountDetails) request.getSession().getAttribute("loggedInUserDetails");
-		String loggedInUserId = details.getLoginId();
-
+		UserAccountDetails userAccountDetails = (UserAccountDetails) request.getSession()
+				.getAttribute(Constants.USER_DETAIL);
+		String loggedInUserId = userAccountDetails.getLoginId();
 		if (Objects.nonNull(loggedInUserId)) {
-			UserAccountDetails userAccountDetails = cashTransactionManagementService
-					.findUserAccountByUserId(loggedInUserId);
-
+			userAccountDetails = cashTransactionManagementService.findUserAccountByUserId(loggedInUserId);
 			if (Objects.nonNull(userAccountDetails) && userAccountDetails.getPremiumUser().equalsIgnoreCase("Yes")) {
-
 				model.addAttribute("accountNo", userAccountDetails.getAccountNo());
 				model.addAttribute("balanceAmount", userAccountDetails.getBalanceAmount());
 				model.addAttribute("redeemPoints", userAccountDetails.getRedeemPoints());
 			}
 		}
-
-		return "redeemDetails";
+		return Constants.REDEEM_DETAILS;
 	}
 
 	@PostMapping(value = "/postredeemDetails")
 	public String postRedeemDetails(HttpServletRequest request, Model model) {
-
-		UserAccountDetails details = (UserAccountDetails) request.getSession().getAttribute("loggedInUserDetails");
+		UserAccountDetails details = (UserAccountDetails) request.getSession().getAttribute(Constants.USER_DETAIL);
 		String loggedInUserId = details.getLoginId();
-		System.out.println("Post mehtod");
-
 		if (Objects.nonNull(loggedInUserId)) {
 			UserAccountDetails userAccountDetails = cashTransactionManagementService
 					.findUserAccountByUserId(loggedInUserId);
-			// Update
 			Integer balanceAmount = userAccountDetails.getBalanceAmount() + userAccountDetails.getRedeemPoints();
-			System.out.println("Before balanceAmount = " + balanceAmount);
-			System.out.println("Before redeemPoints = " + userAccountDetails.getRedeemPoints());
-			Integer redeemPoints = 0;
-
-			cashTransactionManagementService.updateRedeemPoints(loggedInUserId, balanceAmount, redeemPoints);
-			userAccountDetails.setBalanceAmount(balanceAmount);
-			userAccountDetails.setRedeemPoints(redeemPoints);
-
+			cashTransactionManagementService.updateRedeemPoints(loggedInUserId, balanceAmount, 0);
 			userAccountDetails = cashTransactionManagementService.findUserAccountByUserId(loggedInUserId);
 			List<UserAccountDetails> userAccountDetailsList = new ArrayList<>();
 			userAccountDetailsList.add(userAccountDetails);
 			model.addAttribute(Constants.USERNAME, userAccountDetails.getUserName());
-			request.setAttribute("userDetails", userAccountDetailsList);
-
+			request.getSession().setAttribute(Constants.USER_DETAILS, userAccountDetailsList);
+			request.getSession().setAttribute(Constants.USER_DETAIL, userAccountDetails);
 		}
-
 		return Constants.SUCCESS;
 	}
-
 }

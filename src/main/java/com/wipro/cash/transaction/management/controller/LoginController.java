@@ -46,7 +46,7 @@ public class LoginController {
 	public String homePage(HttpServletRequest request, Model model) {
 		@SuppressWarnings("unchecked")
 		List<UserAccountDetails> accountDetails = (List<UserAccountDetails>) request.getSession()
-				.getAttribute("userDetails");
+				.getAttribute(Constants.USER_DETAILS);
 		model.addAttribute(Constants.USERNAME, accountDetails.get(0).getUserName());
 		return Constants.SUCCESS;
 	}
@@ -64,13 +64,8 @@ public class LoginController {
 				List<UserAccountDetails> userAccountDetailsList = new ArrayList<>();
 				userAccountDetailsList.add(userAccountDetails);
 				model.addAttribute(Constants.USERNAME, userAccountDetails.getUserName());
-				request.getSession().setAttribute("userDetails", userAccountDetailsList);
-				request.getSession().setAttribute("loggedInUserDetails", userAccountDetails);
-				request.getSession().setAttribute("userDetail", userAccountDetails);
-
-				List<UserAccountDetails> listAllAccount = cashTransactionManagementService.getUserAccountDetails();
-				listAllAccount.remove(userAccountDetails);
-				request.getSession().setAttribute("listAllAccount", listAllAccount);
+				request.getSession().setAttribute(Constants.USER_DETAILS, userAccountDetailsList);
+				request.getSession().setAttribute(Constants.USER_DETAIL, userAccountDetails);
 				return Constants.SUCCESS;
 			} else {
 				model.addAttribute(Constants.ERROR, "Invalid Credentials");

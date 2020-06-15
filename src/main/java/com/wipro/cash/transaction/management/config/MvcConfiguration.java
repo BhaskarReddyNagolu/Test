@@ -33,11 +33,11 @@ public class MvcConfiguration extends WebMvcConfigurationSupport {
 		registry.addViewController("/").setViewName(Constants.LOGIN);
 		registry.addViewController("/login**").setViewName(Constants.LOGIN);
 		registry.addViewController("/logout**").setViewName(Constants.LOGIN);
-		registry.addViewController("/redeemDetails**").setViewName("redeemDetails");
+		registry.addViewController("/redeemDetails**").setViewName(Constants.REDEEM_DETAILS);
 		registry.addViewController("/postredeemDetails**").setViewName(Constants.SUCCESS);
-		registry.addViewController("/cashTransfer**").setViewName("cashTransfer");
-        registry.addViewController("/cash/transfer**").setViewName(Constants.CASHTRANSFER);
-        registry.addViewController("/transactionHistory**").setViewName("transactionHistory");
+		registry.addViewController("/cashTransfer**").setViewName(Constants.CASHTRANSFER);
+		registry.addViewController("/cash/transfer**").setViewName(Constants.CASHTRANSFER);
+		registry.addViewController("/transactionHistory**").setViewName(Constants.TRANSACTION_HISTORY);
 	}
 
 	@Override

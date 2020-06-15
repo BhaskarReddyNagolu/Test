@@ -28,4 +28,11 @@ public class Constants {
 
 	public static final String USER_ID = "userId";
 	public static final String CASHTRANSFER = "cashTransfer";
+	public static final String TRANSACTION_HISTORY = "transactionHistory";
+	public static final String USER_DETAIL = "userDetail";
+	public static final String USER_DETAILS = "userDetails";
+	public static final String REDEEM_DETAILS = "redeemDetails";
+	public static final String INSUFFICIENT_BALANCE = "Insufficient Balance.";
+	
+	
 }

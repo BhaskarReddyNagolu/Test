@@ -1,9 +1,9 @@
 package com.wipro.cash.transaction.management.config;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class PropertiesReader {
 
 	@Value("${cash.transfer.type.wiretransfer}")
@@ -19,16 +19,14 @@ public class PropertiesReader {
 	private int percentage;
 
 	@Value("${cash.transfer.swift.cashlimit.one}")
-	private int cashlimit1;
+	private int cashlimitOne;
 
 	@Value("${cash.transfer.swift.cashlimit.two}")
-	private int cashlimit2;
+	private int cashlimitTwo;
 
 	@Value("${cash.transfer.swift.cashlimit.three}")
-	private int cashlimit3;
-    
-	
-	@Value("${cash.transfer.type.wiretransfer}")
+	private int cashlimitThree;
+
 	public String getWiretransfer() {
 		return wiretransfer;
 	}
@@ -61,28 +59,46 @@ public class PropertiesReader {
 		this.percentage = percentage;
 	}
 
-	public int getCashlimit1() {
-		return cashlimit1;
+	/**
+	 * @return the cashlimitOne
+	 */
+	public int getCashlimitOne() {
+		return cashlimitOne;
 	}
 
-	public void setCashlimit1(int cashlimit1) {
-		this.cashlimit1 = cashlimit1;
+	/**
+	 * @param cashlimitOne the cashlimitOne to set
+	 */
+	public void setCashlimitOne(int cashlimitOne) {
+		this.cashlimitOne = cashlimitOne;
 	}
 
-	public int getCashlimit2() {
-		return cashlimit2;
+	/**
+	 * @return the cashlimitTwo
+	 */
+	public int getCashlimitTwo() {
+		return cashlimitTwo;
 	}
 
-	public void setCashlimit2(int cashlimit2) {
-		this.cashlimit2 = cashlimit2;
+	/**
+	 * @param cashlimitTwo the cashlimitTwo to set
+	 */
+	public void setCashlimitTwo(int cashlimitTwo) {
+		this.cashlimitTwo = cashlimitTwo;
 	}
 
-	public int getCashlimit3() {
-		return cashlimit3;
+	/**
+	 * @return the cashlimitThree
+	 */
+	public int getCashlimitThree() {
+		return cashlimitThree;
 	}
 
-	public void setCashlimit3(int cashlimit3) {
-		this.cashlimit3 = cashlimit3;
+	/**
+	 * @param cashlimitThree the cashlimitThree to set
+	 */
+	public void setCashlimitThree(int cashlimitThree) {
+		this.cashlimitThree = cashlimitThree;
 	}
 
 }

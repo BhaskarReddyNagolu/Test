@@ -15,7 +15,7 @@ public interface CashTransactionManagementService {
 	UserAccountDetails findUserAccountByUserId(String userId);
 	
 	void updateRedeemPoints(String userId, Integer balanceAmount, Integer redeemPoints);
-	
+
 	void updateRedeemPoints(String userId, Integer redeemPoints);
 
 }

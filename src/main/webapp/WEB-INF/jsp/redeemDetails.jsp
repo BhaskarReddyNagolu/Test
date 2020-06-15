@@ -19,6 +19,7 @@
 			style="float: right;" href="${pageContext.request.contextPath }/home">Home</a>
 		</strong>
 	</div>
+		<div id="successHeader"><strong>Redeem Points </strong> </div>
 	<div class="table-align">
 		<table>
 			<tr>
@@ -42,8 +43,7 @@
 		</table>
 	</div>
 
-	<div style="margin-left: 6%; padding-top: 10px;">
-
+	<div style="padding-top: 10px; text-align:center">
 		<form action="/postredeemDetails" method="post">
 			<input type="submit" name="submit" id="submit" value="submit"
 				autofocus="false" />
