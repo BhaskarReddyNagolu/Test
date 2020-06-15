@@ -24,21 +24,15 @@
 		<table>
 			<tr>
 				<td>Account No</td>
-
 				<td>${accountNo}</td>
-
 			</tr>
 			<tr>
 				<td>Balance</td>
-
 				<td>${balanceAmount}</td>
-
 			</tr>
 			<tr>
 				<td>Points to Redeem</td>
-
 				<td>${redeemPoints}</td>
-
 			</tr>
 		</table>
 	</div>

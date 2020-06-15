@@ -64,8 +64,8 @@ public class CashTransferController {
 			userAccountDetails.setBalanceAmount(updateAccount.getBalanceAmount());
 			userAccountDetails.setRedeemPoints(updateAccount.getRedeemPoints());
 
-			userAccountDetails = cashTransactionManagementService.findUserAccountByUserId(loggedInUserId);
-			userAccountDetailsList.add(userAccountDetails);
+			UserAccountDetails userAccountDetail = cashTransactionManagementService.findUserAccountByUserId(loggedInUserId);
+			userAccountDetailsList.add(userAccountDetail);
 			model.addAttribute(Constants.USERNAME, userAccountDetails.getUserName());
 			request.setAttribute(Constants.USER_DETAILS, userAccountDetailsList);
 			return Constants.SUCCESS;

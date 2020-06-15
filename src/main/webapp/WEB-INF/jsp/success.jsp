@@ -15,8 +15,9 @@
 <body>
 
 	<div class="topnav">
-		<strong> <a href="/cashTransfer">Cash Transfer</a> <a
-			href="/transactionHistory">View Transaction History</a> <c:forEach
+		<strong> <a href="${pageContext.request.contextPath}/cashTransfer">Cash Transfer</a> <a
+			href="${pageContext.request.contextPath}/transactionHistory">View Transaction History</a>
+			 <c:forEach
 				var="userDetails" items="${userDetails}">
 				<c:if test="${userDetails.getPremiumUser().equals('Yes')}">
 					<a href="${pageContext.request.contextPath}/redeemDetails">Redeem</a>
@@ -26,7 +27,6 @@
 		</strong>
 	</div>
 	<div id="successHeader">
-
 		<strong>Logged in successful for the user - <strong
 			style="color: darkblue;"> ${userName}</strong>
 		</strong> <strong style="float: right; padding-right: 15px"">${date}</strong><br />

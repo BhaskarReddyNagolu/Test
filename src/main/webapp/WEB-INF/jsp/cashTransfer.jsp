@@ -17,10 +17,9 @@
 <body>
 	<div class="topnav">
 		<strong> <a style="float: right;"
-			href="${pageContext.request.contextPath }/home">Home</a> <a
-			style="float: right;"
-			href="${pageContext.request.contextPath }/logout">Logout</a>
-		</strong>
+            href="${pageContext.request.contextPath }/logout">Logout</a> <a
+            style="float: right;" href="${pageContext.request.contextPath }/home">Home</a>
+        </strong>
 	</div>
 
 	<div id="successHeader">

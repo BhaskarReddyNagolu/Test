@@ -44,10 +44,14 @@ public class LoginController {
 
 	@GetMapping(value = "/home")
 	public String homePage(HttpServletRequest request, Model model) {
-		@SuppressWarnings("unchecked")
-		List<UserAccountDetails> accountDetails = (List<UserAccountDetails>) request.getSession()
-				.getAttribute(Constants.USER_DETAILS);
-		model.addAttribute(Constants.USERNAME, accountDetails.get(0).getUserName());
+		UserAccountDetails userAccountDetailsSession = (UserAccountDetails) request.getSession()
+				.getAttribute(Constants.USER_DETAIL);
+		UserAccountDetails userAccountDetails = cashTransactionManagementService.findUserAccountByUserId(userAccountDetailsSession.getLoginId());
+		List<UserAccountDetails> userAccountDetailsList = new ArrayList<>();
+		userAccountDetailsList.add(userAccountDetails);
+		model.addAttribute(Constants.USERNAME, userAccountDetails.getUserName());
+		request.getSession().setAttribute(Constants.USER_DETAILS, userAccountDetailsList);
+		request.getSession().setAttribute(Constants.USER_DETAIL, userAccountDetails);
 		return Constants.SUCCESS;
 	}
 

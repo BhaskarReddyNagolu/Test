@@ -110,7 +110,7 @@ public class CashTransactionManagementDaoImpl implements CashTransactionManageme
 			mapSqlParameterSource.addValue(Constants.ACCOUNT_NUMBER, accountnumber);
 
 			LOGGER.debug("Find User Account By AccountNumber {} and Sql Query - {} ", accountnumber,
-					queryProperties.getUpdateUserAccountDetailsByAccountNumber());
+					queryProperties.getUserAccountDetailsByAccountNumber());
 
 			userAccountDetails = namedParameterJdbcTemplate.queryForObject(
 					queryProperties.getUserAccountDetailsByAccountNumber(), mapSqlParameterSource,
