@@ -113,7 +113,7 @@ public class CashTransactionManagementDaoImpl implements CashTransactionManageme
 					queryProperties.getUpdateUserAccountDetailsByAccountNumber());
 
 			userAccountDetails = namedParameterJdbcTemplate.queryForObject(
-					queryProperties.getUpdateUserAccountDetailsByAccountNumber(), mapSqlParameterSource,
+					queryProperties.getUserAccountDetailsByAccountNumber(), mapSqlParameterSource,
 					new UserAccountDetailsMapper());
 		} catch (DataAccessException dataAccessException) {
 			LOGGER.error("Find User Account By AccountNumber - {} and an Exception - {} ", accountnumber,
@@ -144,7 +144,7 @@ public class CashTransactionManagementDaoImpl implements CashTransactionManageme
 			MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
 			mapSqlParameterSource.addValue(Constants.USER_ID, userId);
 			mapSqlParameterSource.addValue("redeem_points", redeemPoints);
-			int status = namedParameterJdbcTemplate.update(queryProperties.getUpdateUserAccountDetailsByUserId(),
+			int status = namedParameterJdbcTemplate.update(queryProperties.getUserAccountRedeemPointsByUserId(),
 					mapSqlParameterSource);
 			LOGGER.debug("updateBalanceAmount Update Status  - {} ", status);
 		} catch (DataAccessException dataAccessException) {

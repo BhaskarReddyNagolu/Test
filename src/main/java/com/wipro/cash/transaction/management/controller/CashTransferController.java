@@ -29,6 +29,7 @@ public class CashTransferController {
 
 	@Autowired
 	private CashTransactionManagementDao cashTransactionManagementDao;
+
 	@Autowired
 	UserAccountDetailsRepository userAccountDetailsRepository;
 
@@ -71,8 +72,7 @@ public class CashTransferController {
 		}
 
 		else {
-			String page = getCashTranferDetails(request, model);
-			return page;
+			return getCashTranferDetails(request, model);
 		}
 	}
 
@@ -107,7 +107,7 @@ public class CashTransferController {
 	}
 
 	public List<String> getTransferType(String isPremiumUser) {
-		List<String> transferTypes = new ArrayList<String>();
+		List<String> transferTypes = new ArrayList<>();
 		if ("Yes".equalsIgnoreCase(isPremiumUser)) {
 			transferTypes.add("Wire Transfer");
 			transferTypes.add("Saving Account");

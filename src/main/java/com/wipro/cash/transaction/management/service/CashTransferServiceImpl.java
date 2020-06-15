@@ -10,7 +10,7 @@ import com.wipro.cash.transaction.management.entity.UserAccountDetails;
 import com.wipro.cash.transaction.management.repository.CashTransactionManagementDao;
 
 @Service
-public class CashTransferServiceImpl {
+public class CashTransferServiceImpl implements CashTransferService {
 
 	@Autowired
 	private PropertiesReader propertiesReader;
@@ -19,8 +19,9 @@ public class CashTransferServiceImpl {
 	private CashTransactionManagementDao cashTransactionDao;
 
 	@Autowired
-	CashTransactionManagementService cashTransactionManagementService;
+	private CashTransactionManagementService cashTransactionManagementService;
 
+	@Override
 	public boolean cashTransfer(UserAccountDetails fromUserAccountDetails, UserAccountDetails toUserAccountDetails,
 			int amount, String transferType, Model model) {
 		boolean isCashToBeTransfered = false;
