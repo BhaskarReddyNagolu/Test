@@ -15,7 +15,7 @@
 <body>
 
 	<div class="topnav">
-		<strong> <a href="#">Cash Transfer</a> <a href="#">View
+		<strong> <a href="/cashTransfer">Cash Transfer</a> <a href="/transactionHistory">View
 				Transaction History</a>
 				<c:forEach var="userDetails" items="${userDetails}">
 				<c:if test="${userDetails.getPremiumUser().equals('Yes')}"> 

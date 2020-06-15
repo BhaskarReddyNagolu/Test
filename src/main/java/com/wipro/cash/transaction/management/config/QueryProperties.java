@@ -18,6 +18,17 @@ public class QueryProperties {
 
 	@Value("${account.details.by.userid}")
 	private String accountDetailsByUserId;
+	
+	
+	@Value("${account.details.by.accountnumber}")
+    private String accountDetailsByAccountNumber;
+    
+    
+    @Value("${all.user.account.transaction.details}")
+    private String transactionHistoryById;
+    
+    @Value("${all.user.account.transaction.details1}")
+    private String transactionHistoryById1;
 
 	/**
 	 * @return the allUserAccountDetails
@@ -46,5 +57,31 @@ public class QueryProperties {
 	public void setAccountDetailsByUserId(String accountDetailsByUserId) {
 		this.accountDetailsByUserId = accountDetailsByUserId;
 	}
+
+	public String getAccountDetailsByAccountNumber() {
+		return accountDetailsByAccountNumber;
+	}
+
+	public void setAccountDetailsByAccountNumber(String accountDetailsByAccountNumber) {
+		this.accountDetailsByAccountNumber = accountDetailsByAccountNumber;
+	}
+
+	public String getTransactionHistoryById() {
+		return transactionHistoryById;
+	}
+
+	public void setTransactionHistoryById(String transactionHistoryById) {
+		this.transactionHistoryById = transactionHistoryById;
+	}
+
+	public String getTransactionHistoryById1() {
+		return transactionHistoryById1;
+	}
+
+	public void setTransactionHistoryById1(String transactionHistoryById1) {
+		this.transactionHistoryById1 = transactionHistoryById1;
+	}
+	
+	
 
 }

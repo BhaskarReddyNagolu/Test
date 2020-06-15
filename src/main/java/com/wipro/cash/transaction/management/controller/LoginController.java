@@ -41,11 +41,12 @@ public class LoginController {
 		model.addAttribute(Constants.DATE, "Today is -  " + date.format(formatter));
 		return Constants.LOGIN;
 	}
-	
+
 	@GetMapping(value = "/home")
 	public String homePage(HttpServletRequest request, Model model) {
 		@SuppressWarnings("unchecked")
-		List<UserAccountDetails> accountDetails =  (List<UserAccountDetails>) request.getSession().getAttribute("userDetails");
+		List<UserAccountDetails> accountDetails = (List<UserAccountDetails>) request.getSession()
+				.getAttribute("userDetails");
 		model.addAttribute(Constants.USERNAME, accountDetails.get(0).getUserName());
 		return Constants.SUCCESS;
 	}
@@ -65,6 +66,11 @@ public class LoginController {
 				model.addAttribute(Constants.USERNAME, userAccountDetails.getUserName());
 				request.getSession().setAttribute("userDetails", userAccountDetailsList);
 				request.getSession().setAttribute("loggedInUserDetails", userAccountDetails);
+				request.getSession().setAttribute("userDetail", userAccountDetails);
+
+				List<UserAccountDetails> listAllAccount = cashTransactionManagementService.getUserAccountDetails();
+				listAllAccount.remove(userAccountDetails);
+				request.getSession().setAttribute("listAllAccount", listAllAccount);
 				return Constants.SUCCESS;
 			} else {
 				model.addAttribute(Constants.ERROR, "Invalid Credentials");

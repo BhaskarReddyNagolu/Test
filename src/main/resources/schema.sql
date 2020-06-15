@@ -9,3 +9,12 @@ CREATE TABLE UserAccountDetails (
   redeem_points BIGINT,
   transfer_type varchar(50)
 );
+
+DROP TABLE IF EXISTS CashTransaction;
+CREATE TABLE CashTransaction (
+  from_account_number INTEGER(10) NOT NULL,
+  transfer_type VARCHAR(50) NOT NULL,
+  to_account_number INTEGER(10) NOT NULL,
+  transfer_amount BIGINT,
+  remarks VARCHAR(255)  NULL
+);

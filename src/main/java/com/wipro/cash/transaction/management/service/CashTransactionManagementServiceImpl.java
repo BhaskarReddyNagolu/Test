@@ -31,8 +31,14 @@ public class CashTransactionManagementServiceImpl implements CashTransactionMana
 
 	@Override
 	public void updateRedeemPoints(String userId, Integer balanceAmount, Integer redeemPoints) {
-		 cashTransactionManagementDao.updateRedeemPoints(userId, balanceAmount, redeemPoints);
-		
+		cashTransactionManagementDao.updateRedeemPoints(userId, balanceAmount, redeemPoints);
+
+	}
+
+	@Override
+	public void updateRedeemPoints(String userId, Integer redeemPoints) {
+		cashTransactionManagementDao.updateRedeemPoints(userId, redeemPoints);
+
 	}
 
 }

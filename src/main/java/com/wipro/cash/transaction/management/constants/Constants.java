@@ -27,4 +27,5 @@ public class Constants {
 	public static final String REDEEM_POINTS = "redeem_points";
 
 	public static final String USER_ID = "userId";
+	public static final String CASHTRANSFER = "cashTransfer";
 }
