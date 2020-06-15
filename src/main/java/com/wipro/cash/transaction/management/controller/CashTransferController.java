@@ -36,7 +36,7 @@ public class CashTransferController {
 	@Autowired
 	private CashTransactionManagementService cashTransactionManagementService;
 
-	@PostMapping(value = "/cash/transfer")
+	@PostMapping(value = "/cashTransferSuccess")
 	public String cashtransfer(HttpServletRequest request, Model model,
 			@RequestParam(value = "transferType", required = false) String transferType,
 			@RequestParam(value = "toAccountNo", required = false) int toAccountNo, @RequestParam("amount") int amount,
@@ -46,7 +46,6 @@ public class CashTransferController {
 				.getAttribute(Constants.USER_DETAIL);
 		String loggedInUserId = userAccountDetails.getLoginId();
 
-		int balaceAmount = userAccountDetails.getBalanceAmount();
 		UserAccountDetails toUserAccountDetails = cashTransactionManagementDao
 				.findUserAccountByAccountNumber(toAccountNo);
 
@@ -54,8 +53,8 @@ public class CashTransferController {
 				amount, transferType, model);
 
 		if (isCashToBeTransferedOrNot) {
-			userAccountDetailsRepository.insertCashTransaction(userAccountDetails.getAccountNo(), balaceAmount,
-					transferType, toAccountNo, amount, remarks);
+			userAccountDetailsRepository.insertCashTransaction(userAccountDetails.getAccountNo(),
+					userAccountDetails.getBalanceAmount(), transferType, toAccountNo, amount, remarks);
 
 			UserAccountDetails updateAccount = cashTransactionManagementDao.findUserAccountByUserId(loggedInUserId);
 
@@ -64,14 +63,16 @@ public class CashTransferController {
 			userAccountDetails.setBalanceAmount(updateAccount.getBalanceAmount());
 			userAccountDetails.setRedeemPoints(updateAccount.getRedeemPoints());
 
-			UserAccountDetails userAccountDetail = cashTransactionManagementService.findUserAccountByUserId(loggedInUserId);
+			UserAccountDetails userAccountDetail = cashTransactionManagementService
+					.findUserAccountByUserId(loggedInUserId);
 			userAccountDetailsList.add(userAccountDetail);
+			
 			model.addAttribute(Constants.USERNAME, userAccountDetails.getUserName());
 			request.setAttribute(Constants.USER_DETAILS, userAccountDetailsList);
+			
 			return Constants.SUCCESS;
-		}
-
-		else {
+			
+		} else {
 			return getCashTranferDetails(request, model);
 		}
 	}
@@ -81,8 +82,9 @@ public class CashTransferController {
 	public String getCashTranferDetails(HttpServletRequest request, Model model) {
 
 		UserAccountDetails details = (UserAccountDetails) request.getSession().getAttribute(Constants.USER_DETAIL);
+		
 		List<UserAccountDetails> userAccountDetailsList = (List<UserAccountDetails>) request.getSession()
-				.getAttribute(Constants.USER_DETAILS);
+				.getAttribute("listAllAccount");
 
 		List<Integer> toAccountNumbers = new ArrayList<>();
 		for (UserAccountDetails accountNumber : userAccountDetailsList) {
@@ -90,6 +92,7 @@ public class CashTransferController {
 		}
 
 		String loggedInUserId = details.getLoginId();
+		
 		if (Objects.nonNull(loggedInUserId)) {
 			UserAccountDetails userAccountDetails = cashTransactionManagementDao
 					.findUserAccountByUserId(loggedInUserId);
@@ -107,6 +110,7 @@ public class CashTransferController {
 	}
 
 	public List<String> getTransferType(String isPremiumUser) {
+		
 		List<String> transferTypes = new ArrayList<>();
 		if ("Yes".equalsIgnoreCase(isPremiumUser)) {
 			transferTypes.add("Wire Transfer");
@@ -121,6 +125,7 @@ public class CashTransferController {
 
 	@GetMapping(value = "/transactionHistory")
 	public String getCashTransactionDetails(HttpServletRequest request, Model model) {
+
 		List<UserAccountDetails> listAllAccount = cashTransactionManagementService.getUserAccountDetails();
 		request.getSession().setAttribute(Constants.USER_DETAILS, listAllAccount);
 
@@ -141,8 +146,8 @@ public class CashTransferController {
 		List<TransactionDetails> accountTransactonsForCredit = userAccountDetailsRepository
 				.accountTransactonsForCredit(userId);
 
-		request.getSession().setAttribute("tranactionDetails", accountTransactonsForDebit);
-		request.getSession().setAttribute("tranactionDetails1", accountTransactonsForCredit);
+		request.setAttribute("accountTransactonsForDebit", accountTransactonsForDebit);
+		request.setAttribute("accountTransactonsForCredit", accountTransactonsForCredit);
 
 		return Constants.TRANSACTION_HISTORY;
 	}

@@ -35,10 +35,10 @@ public class QueryProperties {
 	private String updateUserAccountDetailsByUserId;
 
 	@Value("${update.user.account.balacne.by.account.number}")
-	private String userAccountBalacneByAccountNumber;
+	private String updateUserAccountBalacneByAccountNumber;
 
 	@Value("${update.user.account.redeem.points.by.userid}")
-	private String userAccountRedeemPointsByUserId;
+	private String updateUserAccountRedeemPointsByUserId;
 
 	/**
 	 * @return the allUserAccountDetails
@@ -76,9 +76,7 @@ public class QueryProperties {
 	}
 
 	/**
-	 * @param userAccountDetailsByAccountNumber the
-	 *                                          userAccountDetailsByAccountNumber to
-	 *                                          set
+	 * @param userAccountDetailsByAccountNumber the userAccountDetailsByAccountNumber to set
 	 */
 	public void setUserAccountDetailsByAccountNumber(String userAccountDetailsByAccountNumber) {
 		this.userAccountDetailsByAccountNumber = userAccountDetailsByAccountNumber;
@@ -92,12 +90,9 @@ public class QueryProperties {
 	}
 
 	/**
-	 * @param userAccountTransactionDetailsFromAccountNumber the
-	 *                                                       userAccountTransactionDetailsFromAccountNumber
-	 *                                                       to set
+	 * @param userAccountTransactionDetailsFromAccountNumber the userAccountTransactionDetailsFromAccountNumber to set
 	 */
-	public void setUserAccountTransactionDetailsFromAccountNumber(
-			String userAccountTransactionDetailsFromAccountNumber) {
+	public void setUserAccountTransactionDetailsFromAccountNumber(String userAccountTransactionDetailsFromAccountNumber) {
 		this.userAccountTransactionDetailsFromAccountNumber = userAccountTransactionDetailsFromAccountNumber;
 	}
 
@@ -109,9 +104,7 @@ public class QueryProperties {
 	}
 
 	/**
-	 * @param userAccountTransactionDetailsToAccountNumber the
-	 *                                                     userAccountTransactionDetailsToAccountNumber
-	 *                                                     to set
+	 * @param userAccountTransactionDetailsToAccountNumber the userAccountTransactionDetailsToAccountNumber to set
 	 */
 	public void setUserAccountTransactionDetailsToAccountNumber(String userAccountTransactionDetailsToAccountNumber) {
 		this.userAccountTransactionDetailsToAccountNumber = userAccountTransactionDetailsToAccountNumber;
@@ -125,9 +118,7 @@ public class QueryProperties {
 	}
 
 	/**
-	 * @param updateUserAccountDetailsByAccountNumber the
-	 *                                                updateUserAccountDetailsByAccountNumber
-	 *                                                to set
+	 * @param updateUserAccountDetailsByAccountNumber the updateUserAccountDetailsByAccountNumber to set
 	 */
 	public void setUpdateUserAccountDetailsByAccountNumber(String updateUserAccountDetailsByAccountNumber) {
 		this.updateUserAccountDetailsByAccountNumber = updateUserAccountDetailsByAccountNumber;
@@ -141,42 +132,37 @@ public class QueryProperties {
 	}
 
 	/**
-	 * @param updateUserAccountDetailsByUserId the updateUserAccountDetailsByUserId
-	 *                                         to set
+	 * @param updateUserAccountDetailsByUserId the updateUserAccountDetailsByUserId to set
 	 */
 	public void setUpdateUserAccountDetailsByUserId(String updateUserAccountDetailsByUserId) {
 		this.updateUserAccountDetailsByUserId = updateUserAccountDetailsByUserId;
 	}
 
 	/**
-	 * @return the userAccountBalacneByAccountNumber
+	 * @return the updateUserAccountBalacneByAccountNumber
 	 */
-	public String getUserAccountBalacneByAccountNumber() {
-		return userAccountBalacneByAccountNumber;
+	public String getUpdateUserAccountBalacneByAccountNumber() {
+		return updateUserAccountBalacneByAccountNumber;
 	}
 
 	/**
-	 * @param userAccountBalacneByAccountNumber the
-	 *                                          userAccountBalacneByAccountNumber to
-	 *                                          set
+	 * @param updateUserAccountBalacneByAccountNumber the updateUserAccountBalacneByAccountNumber to set
 	 */
-	public void setUserAccountBalacneByAccountNumber(String userAccountBalacneByAccountNumber) {
-		this.userAccountBalacneByAccountNumber = userAccountBalacneByAccountNumber;
+	public void setUpdateUserAccountBalacneByAccountNumber(String updateUserAccountBalacneByAccountNumber) {
+		this.updateUserAccountBalacneByAccountNumber = updateUserAccountBalacneByAccountNumber;
 	}
 
 	/**
-	 * @return the userAccountRedeemPointsByUserId
+	 * @return the updateUserAccountRedeemPointsByUserId
 	 */
-	public String getUserAccountRedeemPointsByUserId() {
-		return userAccountRedeemPointsByUserId;
+	public String getUpdateUserAccountRedeemPointsByUserId() {
+		return updateUserAccountRedeemPointsByUserId;
 	}
 
 	/**
-	 * @param userAccountRedeemPointsByUserId the userAccountRedeemPointsByUserId to
-	 *                                        set
+	 * @param updateUserAccountRedeemPointsByUserId the updateUserAccountRedeemPointsByUserId to set
 	 */
-	public void setUserAccountRedeemPointsByUserId(String userAccountRedeemPointsByUserId) {
-		this.userAccountRedeemPointsByUserId = userAccountRedeemPointsByUserId;
+	public void setUpdateUserAccountRedeemPointsByUserId(String updateUserAccountRedeemPointsByUserId) {
+		this.updateUserAccountRedeemPointsByUserId = updateUserAccountRedeemPointsByUserId;
 	}
-
 }

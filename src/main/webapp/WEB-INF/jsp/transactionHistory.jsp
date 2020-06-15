@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,14 +10,14 @@
 <title>Transaction History</title>
 <!-- Static content -->
 <link rel="stylesheet" href="resources/css/style.css" type="text/css"
-	media="screen" />
+    media="screen" />
 </head>
 <body>
 	<div class="topnav">
 		<strong> <a style="float: right;"
-            href="${pageContext.request.contextPath }/logout">Logout</a> <a
-            style="float: right;" href="${pageContext.request.contextPath }/home">Home</a>
-        </strong>
+			href="${pageContext.request.contextPath }/logout">Logout</a> <a
+			style="float: right;" href="${pageContext.request.contextPath }/home">Home</a>
+		</strong>
 	</div>
 
 
@@ -40,12 +40,13 @@
 
 						</tr>
 						<tr>
-							<c:forEach var="tranactionDetails" items="${tranactionDetails}">
+							<c:forEach var="accountTransactonsForDebit"
+								items="${accountTransactonsForDebit}">
 								<tr>
-									<td>${tranactionDetails.getTransferType()}</td>
-									<td>${tranactionDetails.getToAccountNumber()}</td>
-									<td>${tranactionDetails.getBalaceAmount()}</td>
-									<td>${tranactionDetails.getRemarks()}</td>
+									<td>${accountTransactonsForDebit.getTransferType()}</td>
+									<td>${accountTransactonsForDebit.getToAccountNumber()}</td>
+									<td>${accountTransactonsForDebit.getBalaceAmount()}</td>
+									<td>${accountTransactonsForDebit.getRemarks()}</td>
 								</tr>
 							</c:forEach>
 						</tr>
@@ -68,13 +69,13 @@
 
 							</tr>
 							<tr>
-								<c:forEach var="tranactionDetails1"
-									items="${tranactionDetails1}">
+								<c:forEach var="accountTransactonsForCredit"
+									items="${accountTransactonsForCredit}">
 									<tr>
-										<td>${tranactionDetails1.getTransferType()}</td>
-										<td>${tranactionDetails1.getFromAccountNumber()}</td>
-										<td>${tranactionDetails1.getBalaceAmount()}</td>
-										<td>${tranactionDetails1.getRemarks()}</td>
+										<td>${accountTransactonsForCredit.getTransferType()}</td>
+										<td>${accountTransactonsForCredit.getFromAccountNumber()}</td>
+										<td>${accountTransactonsForCredit.getBalaceAmount()}</td>
+										<td>${accountTransactonsForCredit.getRemarks()}</td>
 									</tr>
 								</c:forEach>
 							</tr>

@@ -45,16 +45,20 @@ public class CashTransferServiceImpl implements CashTransferService {
 
 		if (transferType.equalsIgnoreCase(propertiesReader.getWiretransfer())) {
 			int redeemPoints = ((amount) * (propertiesReader.getPercentage())) / (100);
-			cashTransactionManagementService.updateRedeemPoints(loggedInUserId, redeemPoints);
+			
+			UserAccountDetails userAccount = cashTransactionManagementService.findUserAccountByUserId(loggedInUserId);
+			cashTransactionManagementService.updateRedeemPoints(loggedInUserId,
+					userAccount.getRedeemPoints() + redeemPoints);
 
 			if (amount > balanceAmount) {
 				model.addAttribute(Constants.ERROR, Constants.INSUFFICIENT_BALANCE);
+				return false;
 			} else {
 				balanceAmount = balanceAmount - amount;
 				cashTransactionDao.updateBalanceAmount(accountNumber, balanceAmount);
 				return true;
 			}
-
+		} else if (transferType.equalsIgnoreCase(propertiesReader.getSwiftpayment())) {
 			int fee = getFee(amount);
 			amount += fee;
 			if (amount <= 0) {
@@ -68,7 +72,7 @@ public class CashTransferServiceImpl implements CashTransferService {
 				cashTransactionDao.updateBalanceAmount(accountNumber, balanceAmount);
 				return true;
 			}
-		} else {
+		} else if (transferType.equalsIgnoreCase(propertiesReader.getSavingaccount())) {
 			if (amount > balanceAmount) {
 				model.addAttribute(Constants.ERROR, Constants.INSUFFICIENT_BALANCE);
 				return false;
@@ -77,8 +81,8 @@ public class CashTransferServiceImpl implements CashTransferService {
 				cashTransactionDao.updateBalanceAmount(accountNumber, balanceAmount);
 				return true;
 			}
-
 		}
+		return false;
 	}
 
 	public void deposit(UserAccountDetails userAccountDetails, Integer amount, Model model) {
@@ -101,7 +105,5 @@ public class CashTransferServiceImpl implements CashTransferService {
 		else if (amount > propertiesReader.getCashlimitThree())
 			fee = 20;
 		return fee;
-
 	}
-
 }

@@ -36,7 +36,7 @@ public class MvcConfiguration extends WebMvcConfigurationSupport {
 		registry.addViewController("/redeemDetails**").setViewName(Constants.REDEEM_DETAILS);
 		registry.addViewController("/postredeemDetails**").setViewName(Constants.SUCCESS);
 		registry.addViewController("/cashTransfer**").setViewName(Constants.CASHTRANSFER);
-		registry.addViewController("/cash/transfer**").setViewName(Constants.CASHTRANSFER);
+		registry.addViewController("/cashTransferSuccess**").setViewName(Constants.SUCCESS);
 		registry.addViewController("/transactionHistory**").setViewName(Constants.TRANSACTION_HISTORY);
 	}
 

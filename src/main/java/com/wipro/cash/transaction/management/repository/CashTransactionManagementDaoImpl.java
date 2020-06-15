@@ -144,7 +144,7 @@ public class CashTransactionManagementDaoImpl implements CashTransactionManageme
 			MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
 			mapSqlParameterSource.addValue(Constants.USER_ID, userId);
 			mapSqlParameterSource.addValue("redeem_points", redeemPoints);
-			int status = namedParameterJdbcTemplate.update(queryProperties.getUserAccountRedeemPointsByUserId(),
+			int status = namedParameterJdbcTemplate.update(queryProperties.getUpdateUserAccountRedeemPointsByUserId(),
 					mapSqlParameterSource);
 			LOGGER.debug("updateBalanceAmount Update Status  - {} ", status);
 		} catch (DataAccessException dataAccessException) {

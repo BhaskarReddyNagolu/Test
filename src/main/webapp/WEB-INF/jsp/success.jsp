@@ -13,7 +13,6 @@
 	media="screen" />
 </head>
 <body>
-
 	<div class="topnav">
 		<strong> <a href="${pageContext.request.contextPath}/cashTransfer">Cash Transfer</a> <a
 			href="${pageContext.request.contextPath}/transactionHistory">View Transaction History</a>

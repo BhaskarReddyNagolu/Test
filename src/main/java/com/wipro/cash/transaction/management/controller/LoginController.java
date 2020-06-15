@@ -46,12 +46,7 @@ public class LoginController {
 	public String homePage(HttpServletRequest request, Model model) {
 		UserAccountDetails userAccountDetailsSession = (UserAccountDetails) request.getSession()
 				.getAttribute(Constants.USER_DETAIL);
-		UserAccountDetails userAccountDetails = cashTransactionManagementService.findUserAccountByUserId(userAccountDetailsSession.getLoginId());
-		List<UserAccountDetails> userAccountDetailsList = new ArrayList<>();
-		userAccountDetailsList.add(userAccountDetails);
-		model.addAttribute(Constants.USERNAME, userAccountDetails.getUserName());
-		request.getSession().setAttribute(Constants.USER_DETAILS, userAccountDetailsList);
-		request.getSession().setAttribute(Constants.USER_DETAIL, userAccountDetails);
+		this.setUserDetailsInSession(model, request, userAccountDetailsSession);
 		return Constants.SUCCESS;
 	}
 
@@ -65,11 +60,10 @@ public class LoginController {
 			UserAccountDetails userAccountDetails = cashTransactionManagementService.findUserAccountByUserId(userName);
 			if (Objects.nonNull(userAccountDetails) && userName.equals(userAccountDetails.getLoginId())
 					&& password.equals(userAccountDetails.getPassword())) {
-				List<UserAccountDetails> userAccountDetailsList = new ArrayList<>();
-				userAccountDetailsList.add(userAccountDetails);
-				model.addAttribute(Constants.USERNAME, userAccountDetails.getUserName());
-				request.getSession().setAttribute(Constants.USER_DETAILS, userAccountDetailsList);
-				request.getSession().setAttribute(Constants.USER_DETAIL, userAccountDetails);
+				this.setUserDetailsInSession(model, request, userAccountDetails);
+				 List<UserAccountDetails> listAllAccount = cashTransactionManagementService.getUserAccountDetails();
+                 listAllAccount.remove(userAccountDetails);
+                 request.getSession().setAttribute("listAllAccount", listAllAccount);
 				return Constants.SUCCESS;
 			} else {
 				model.addAttribute(Constants.ERROR, "Invalid Credentials");
@@ -86,5 +80,14 @@ public class LoginController {
 		session.removeAttribute(Constants.USERNAME);
 		session.invalidate();
 		return Constants.LOGIN;
+	}
+
+	private void setUserDetailsInSession(Model model, HttpServletRequest request,
+			UserAccountDetails userAccountDetails) {
+		List<UserAccountDetails> userAccountDetailsList = new ArrayList<>();
+		userAccountDetailsList.add(userAccountDetails);
+		model.addAttribute(Constants.USERNAME, userAccountDetails.getUserName());
+		request.getSession().setAttribute(Constants.USER_DETAILS, userAccountDetailsList);
+		request.getSession().setAttribute(Constants.USER_DETAIL, userAccountDetails);
 	}
 }
