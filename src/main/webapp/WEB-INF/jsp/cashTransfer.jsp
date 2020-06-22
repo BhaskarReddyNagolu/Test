@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,15 +10,15 @@
 <title>Cash Transfer</title>
 <!-- Static content -->
 <link rel="stylesheet" href="resources/css/style.css" type="text/css"
-    media="screen" />
+	media="screen" />
 </head>
 <body>
 
 	<div class="topnav">
 		<strong> <a style="float: right;"
-            href="${pageContext.request.contextPath }/logout">Logout</a> <a
-            style="float: right;" href="${pageContext.request.contextPath }/home">Home</a>
-        </strong>
+			href=${pageContext.request.contextPath}/logout>Logout</a> <a
+			style="float: right;" href=${pageContext.request.contextPath}/home>Home</a>
+		</strong>
 	</div>
 
 	<div id="successHeader">
@@ -34,10 +34,9 @@
 				<label for="accountNumber"> <strong
 					style="margin: 0px 0px 10px 0px;"> Account : </strong></label>&nbsp;&nbsp;
 				${accountNo}<br /> <br /> <label for="balance"><strong>Balance
-						: </strong></label>&nbsp;&nbsp; ${balanceAmount }<br /> <br /> <label
+						: </strong></label>&nbsp;&nbsp; ${balanceAmount}<br /> <br /> <label
 					for="lbltransferType"> <strong
 					style="margin: 0px 0px 10px 0px;"> Transfer Type : </strong></label>&nbsp;&nbsp;
-
 
 				<select name="transferType" id=transferType>
 					<c:forEach items="${listTransferType}" var="listTransferType">
@@ -57,7 +56,6 @@
 					style="margin: 0px 0px 10px 0px;"> Remarks : </strong></label>&nbsp;&nbsp;
 				<input type="text" id="remarks" name="remarks" mxlength="30"
 					autofocus="false"><br />
-
 
 				<div style="margin-left: 6%; padding-top: 10px;">
 					<input type="submit" name="submit" id="Submit" value="Submit"
